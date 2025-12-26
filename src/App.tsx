@@ -16,7 +16,8 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      {/* Tambahkan basename di bawah ini */}
+      <BrowserRouter basename="/buku-kasku">
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/buat-buku-kas" element={<BuatBukuKas />} />
