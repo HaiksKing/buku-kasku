@@ -21,6 +21,11 @@ export default function BuatBukuKas() {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  // Fungsi helper untuk mengubah string format IDR (2.000.000) menjadi angka (2000000)
+  const parseCurrencyToNumber = (value: string) => {
+    return parseFloat(value.replace(/\./g, '')) || 0;
+  };
+
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
 
@@ -37,7 +42,7 @@ export default function BuatBukuKas() {
     if (!formData.saldoAwal.trim()) {
       newErrors.saldoAwal = 'Saldo awal wajib diisi';
     } else {
-      const saldo = parseFloat(formData.saldoAwal.replace(/[^\d.-]/g, ''));
+      const saldo = parseCurrencyToNumber(formData.saldoAwal);
       if (isNaN(saldo)) {
         newErrors.saldoAwal = 'Saldo awal harus berupa angka';
       } else if (saldo < 0) {
@@ -61,7 +66,8 @@ export default function BuatBukuKas() {
         id: generateId(),
         nama: formData.nama.trim(),
         deskripsi: formData.deskripsi.trim(),
-        saldoAwal: parseFloat(formData.saldoAwal.replace(/[^\d.-]/g, '')),
+        // Memastikan saldo disimpan sebagai angka murni tanpa titik
+        saldoAwal: parseCurrencyToNumber(formData.saldoAwal),
         createdAt: new Date(),
       };
 
