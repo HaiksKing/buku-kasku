@@ -6,7 +6,7 @@ import { componentTagger } from "lovable-tagger";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   // Baris di bawah ini adalah perbaikannya:
-  base: '/buku-kasku/', 
+  base: './', 
   server: {
     host: "::",
     port: 8080,
